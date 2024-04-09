@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PizzaModel>
+
+<div class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <form method="get" asp-action="Index" asp-controller="Home" class="d-flex justify-content-center">
+                <input name="pesquisar" class="form-control w-50 mx-2" style="border:1px solid black;" />
+                <button type="submit" class="btn btn-primary w-10">Pesquisar</button>
+            </form>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-0 ">
+            @if (Model != null)
+            {
+                if (Model.Count() > 0)
+                {
+                    @foreach (var pizza in Model)
+                    {
+                        <div class="card mx-3 my-3 text-center justify-content-center d-flex align-content-center" style="width: 12rem;">
+                            <img src="/imagem/@pizza.Capa" class="card-img-top" style="width:190px; height:150px" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@pizza.Sabor</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Pequena: R$ @pizza.Valor</li>
+                                <li class="list-group-item">Média:   R$ @(pizza.Valor + 15) </li>
+                                <li class="list-group-item">Grande:  R$ @(pizza.Valor + 25)</li>
+                            </ul>
+                            <div class="card-body">
+                                <a class="btn btn-primary w-100" style="font-size:16px" asp-action="Detalhes" asp-controller="Pizza" asp-route-id="@pizza.Id">Detalhes</a>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+
+    </div>
+</div>

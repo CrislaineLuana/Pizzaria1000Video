@@ -1,0 +1,21 @@
+﻿@model PizzaModel
+
+<div class="container my-5">
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <img src="/imagem/@Model.Capa" style="width:350px; height:350px" />
+        <h1 class="text-body-emphasis">@Model.Sabor</h1>
+        <p class="col-lg-8 mx-auto fs-5 text-muted">
+            @Model.Descricao
+        </p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Pequena: R$ @Model.Valor</li>
+            <li class="list-group-item">Média:   R$ @(Model.Valor + 15) </li>
+            <li class="list-group-item">Grande:  R$ @(Model.Valor + 25)</li>
+        </ul>
+
+
+        <a type="submit" class="btn btn-info w-50 mt-3" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+
+
+    </div>
+</div>

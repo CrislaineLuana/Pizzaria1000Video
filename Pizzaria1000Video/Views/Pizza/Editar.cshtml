@@ -1,0 +1,81 @@
+﻿@model PizzaModel
+
+<div class="container mt-5">
+    <form method="post" asp-action="Editar" asp-controller="Pizza" enctype="multipart/form-data">
+        <h2>Edição de tenis - @Model.Sabor</h2>
+
+        <input type="hidden" asp-for="Id" />
+
+        @if (Model.Capa != null)
+        {
+            <div class="text-center">
+                <label for="ImageFile">
+                    <img src="/imagem/@Model.Capa" id="img" style="width:150px; height:200px" />
+                </label>
+            </div>
+
+        }
+
+
+        <input type="hidden" asp-for="Capa" />
+        <div class="mb-1">
+            <label class="form-label mt-3">Capa:</label>
+            <input type="file" id="ImageFile" name="foto" class="form-control shadow-none" />
+        </div>
+
+        <div class="mb-1">
+            <label class="form-label">Sabor:</label>
+            <input type="text" asp-for="Sabor" class="form-control shadow-none">
+            <span class="text-danger" asp-validation-for="Sabor"></span>
+        </div>
+        <div class="mb-1">
+            <label class="form-label">Descrição:</label>
+            <textarea type="text" asp-for="Descricao" class="form-control shadow-none"></textarea>
+            <span class="text-danger" asp-validation-for="Descricao"></span>
+        </div>
+        <div class="mb-1">
+            <label class="form-label">Valor:</label>
+            <input type="number" min="1" step="any" asp-for="Valor" class="form-control shadow-none">
+            <span class="text-danger" asp-validation-for="Valor"></span>
+        </div>
+
+
+
+        <div class="btn-box d-flex mt-3">
+            <button type="submit" type="button" class="btn btn-success w-50 mx-1"><i class="bi bi-plus-circle"></i> Editar!</button>
+            <a type="submit" class="btn btn-info w-50" asp-controller="Pizza" asp-action="Index"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
+        </div>
+
+    </form>
+</div>
+
+
+
+<script>
+
+
+    const inputFile = document.querySelector("#ImageFile");
+
+    inputFile.addEventListener("change", function (e) {
+        const inputTarget = e.target;
+        const file = inputTarget.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function (e) {
+                const readerTarget = e.target;
+                const img = document.querySelector("#img");
+                img.src = readerTarget.result;
+
+                const figcaption = document.querySelector("#figcaption");
+                figcaption.innerHTML = file.name;
+            });
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+
+    )
+</script>
